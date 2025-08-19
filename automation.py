@@ -40,3 +40,22 @@ def log_changes(config):
     """Log updates to a text file"""
     with open(LOG_FILE, "a") as log:
         log.write(f"Updated on {config['last_updated']} | Version: {config['version']} | Project: {config.get('project_name')} | Author: {config.get('author')}\n")
+
+def main():
+    parser = argparse.ArgumentParser(description="Automation Script for Config Updates")
+    parser.add_argument("--project", help="Set project name")
+    parser.add_argument("--author", help="Set author name")
+    parser.add_argument("--version", help="Set version manually")
+
+    args = parser.parse_args()
+
+    config = load_config()
+    updated_config = update_config(config, args.project, args.author, args.version)
+    save_config(updated_config)
+    log_changes(updated_config)
+
+    print("✅ Configuration updated successfully!")
+    print("📌 Current Config:", updated_config)
+
+if __name__ == "__main__":
+    main()
