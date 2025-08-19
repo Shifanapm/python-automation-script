@@ -30,3 +30,8 @@ def update_config(config, project_name=None, author=None, version=None):
         config["version"] = str(float(config.get("version", "1.0")) + 0.1)
     
     return config
+
+def save_config(config):
+    """Save updated configuration back to file"""
+    with open(CONFIG_FILE, "w") as file:
+        json.dump(config, file, indent=4)
