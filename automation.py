@@ -14,3 +14,19 @@ def load_config():
     else:
         print("Config file not found. Creating a new one...")
         return {}
+    
+def update_config(config, project_name=None, author=None, version=None):
+    """Update configuration values"""
+    config["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    if project_name:
+        config["project_name"] = project_name
+    if author:
+        config["author"] = author
+    if version:
+        config["version"] = version
+    else:
+        # If version not provided, auto increment
+        config["version"] = str(float(config.get("version", "1.0")) + 0.1)
+    
+    return config
