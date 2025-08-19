@@ -35,3 +35,8 @@ def save_config(config):
     """Save updated configuration back to file"""
     with open(CONFIG_FILE, "w") as file:
         json.dump(config, file, indent=4)
+
+def log_changes(config):
+    """Log updates to a text file"""
+    with open(LOG_FILE, "a") as log:
+        log.write(f"Updated on {config['last_updated']} | Version: {config['version']} | Project: {config.get('project_name')} | Author: {config.get('author')}\n")
